@@ -100,7 +100,7 @@ export function Menu() {
           <nav>
             <LinkList>
               <ListItem>
-                <NavLink to="/produtos/list" style={linkIsActive}>
+                <NavLink to="/produtos" style={linkIsActive}>
                   <Package />
                   <p>Produtos</p>
                 </NavLink>
