@@ -37,7 +37,7 @@ const valuesInMenuGroups = {
 };
 
 export function Menu() {
-  const [whichTabIsOpen, setWhichTabIsOpen] =
+  const [selectedMenuGroup, setSelectedMenuGroup] =
     useState<valuesTypesInMenuGroups>('records');
 
   const { colors } = useTheme();
@@ -50,13 +50,13 @@ export function Menu() {
   }
 
   function closeTab() {
-    setWhichTabIsOpen('displayOff');
+    setSelectedMenuGroup('displayOff');
   }
 
   return (
     <TabsRoot
-      value={whichTabIsOpen}
-      onValueChange={setWhichTabIsOpen as (value: string) => void}
+      value={selectedMenuGroup}
+      onValueChange={setSelectedMenuGroup as (value: string) => void}
     >
       <TabsList>
         <Logo>
@@ -70,9 +70,9 @@ export function Menu() {
         </TabsTrigger>
       </TabsList>
 
-      <ContainerTabsContent isTheTabVisible={whichTabIsOpen}>
+      <ContainerTabsContent isTheTabVisible={selectedMenuGroup}>
         <Header>
-          <h2>{valuesInMenuGroups[whichTabIsOpen]}</h2>
+          <h2>{valuesInMenuGroups[selectedMenuGroup]}</h2>
           <MinimizeMenuButton type="button" onClick={closeTab}>
             <CaretDoubleLeft weight="bold" alt="Fechar menu" />
           </MinimizeMenuButton>

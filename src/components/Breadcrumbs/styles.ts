@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const List = styled.ul`
   display: flex;
   gap: 0 10px;
+  margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.color_800};
   font-size: 14px;
 
