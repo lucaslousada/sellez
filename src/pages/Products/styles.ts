@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { List, Trigger } from '@radix-ui/react-tabs';
+import { List, Trigger, Content } from '@radix-ui/react-tabs';
 
 export const Container = styled.div`
   display: flex;
@@ -47,9 +47,12 @@ export const TabsTrigger = styled(Trigger)`
   }
 `;
 
+export const TabsContent = styled(Content)`
+  padding-top: 20px;
+`;
+
 export const Table = styled.table`
   width: 100%;
-  margin-top: 20px;
   border-spacing: 0;
   border-radius: 5px;
   border: 1px solid ${({ theme }) => theme.colors.transparent_color_100};
