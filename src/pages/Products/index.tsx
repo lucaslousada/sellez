@@ -3,6 +3,7 @@ import { Root as TabsRoot } from '@radix-ui/react-tabs';
 import { api } from '../../services/api';
 import { Menu } from '../../components/Menu';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
+import { Filters } from './components/Filters';
 import { LoadingSpinner } from '../../components/LoadingSpinner';
 
 import { CaretRight } from 'phosphor-react';
@@ -63,6 +64,7 @@ export function Products() {
           <li>Produtos</li>
         </Breadcrumbs>
         <h1>Produtos</h1>
+        <Filters />
         <TabsRoot
           value={displayedProductTypeTab}
           onValueChange={setDisplayedProductTypeTab as (value: string) => void}

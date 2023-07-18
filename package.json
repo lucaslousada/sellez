@@ -11,6 +11,7 @@
     "server": "json-server -w src/db/db.json -p 3333 -d 1000"
   },
   "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-tabs": "^1.0.4",
     "axios": "^1.4.0",
     "phosphor-react": "^1.4.1",
