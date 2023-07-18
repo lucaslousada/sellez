@@ -33,7 +33,7 @@ type valuesTypesInMenuGroups = keyof typeof valuesInMenuGroups;
 const valuesInMenuGroups = {
   dashboard: 'Painel de Controle',
   records: 'Cadastros',
-  displayOff: '',
+  none: 'Exibição desativada',
 };
 
 export function Menu() {
@@ -50,7 +50,7 @@ export function Menu() {
   }
 
   function closeTab() {
-    setSelectedMenuGroup('displayOff');
+    setSelectedMenuGroup('none');
   }
 
   return (

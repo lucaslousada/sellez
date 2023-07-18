@@ -73,7 +73,7 @@ export const TabsTrigger = styled(Trigger)`
 
 export const ContainerTabsContent = styled.div<ContainerTabsContentProps>`
   display: ${({ isTheTabVisible }) =>
-    isTheTabVisible === 'displayOff' ? 'none' : 'initial'};
+    isTheTabVisible === 'none' ? 'none' : 'initial'};
   width: 250px;
   padding: 40px 15px 20px;
   background-color: ${({ theme }) => theme.colors.color_200};
@@ -90,7 +90,6 @@ export const Header = styled.header`
   > h2 {
     font-size: 14px;
     color: ${({ theme }) => theme.colors.color_700};
-    text-transform: capitalize;
   }
 `;
 
