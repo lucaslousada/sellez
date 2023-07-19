@@ -2,6 +2,7 @@
   "products": [
     {
       "id": 1,
+      "status": "active",
       "sku": 1,
       "name": "Camiseta Preta",
       "stock": 123,
@@ -17,6 +18,7 @@
     },
     {
       "id": 2,
+      "status": "active",
       "sku": 1,
       "name": "Camiseta Preta",
       "stock": 123,

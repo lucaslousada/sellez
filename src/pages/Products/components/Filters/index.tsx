@@ -1,5 +1,6 @@
 import { RefineSearch } from './RefineSearch';
 import { Sort } from './Sort';
+import { Status } from './Status';
 
 import { MagnifyingGlass } from 'phosphor-react';
 
@@ -19,6 +20,9 @@ export function Filters() {
       <MultipleFilters>
         <li>
           <Sort />
+        </li>
+        <li>
+          <Status />
         </li>
       </MultipleFilters>
     </Container>

@@ -32,6 +32,7 @@ export const buttonForFilters = css`
   border: 1px solid ${({ theme }) => theme.colors.transparent_color_100};
   border-radius: 20px;
   font-size: 14px;
+  color: ${({ theme }) => theme.colors.color_900};
   text-transform: lowercase;
   transition: box-shadow ${({ theme }) => theme.transitions.default},
     border-color ${({ theme }) => theme.transitions.default};
