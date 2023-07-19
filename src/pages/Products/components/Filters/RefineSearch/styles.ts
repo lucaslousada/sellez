@@ -15,7 +15,8 @@ export const DropdownMenuTrigger = styled(Trigger)`
   background-color: ${({ theme }) => theme.colors.color_400};
   border: none;
   border-radius: 15px;
-  transition: background-color ${({ theme }) => theme.transitions.default};
+  text-transform: lowercase;
+  transition: box-shadow ${({ theme }) => theme.transitions.default};
 
   span {
     padding: 0 4px;
@@ -30,11 +31,12 @@ export const DropdownMenuTrigger = styled(Trigger)`
 
   &:hover,
   &[data-state='open'] {
-    background-color: ${({ theme }) => theme.colors.color_600};
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.main};
   }
 `;
 
 export const DropdownMenuContent = styled(Content)`
+  z-index: 1;
   padding: 6px 8px;
   margin: 4px;
   background-color: ${({ theme }) => theme.colors.color_300};

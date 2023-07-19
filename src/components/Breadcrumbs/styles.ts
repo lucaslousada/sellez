@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const List = styled.ul`
+export const List = styled.ol`
   display: flex;
   gap: 0 10px;
   margin-bottom: 40px;

@@ -31,7 +31,7 @@ export function Breadcrumbs({
         </li>
       )}
       <LinkHomePage>
-        <Link to="/">
+        <Link to="/" title="Página inicial">
           <House />
         </Link>
         <CaretRight />

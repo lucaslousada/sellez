@@ -11,23 +11,22 @@ import {
   DropdownMenuTrigger,
 } from './styles';
 
-type SearchRefinementItemTypes = keyof typeof searchRefinementItems;
+type SelectableItemTypes = keyof typeof selectableItems;
 
-const searchRefinementItems = {
+const selectableItems = {
   sku: 'SKU',
-  gtin_ean: 'GTIN/EAN',
+  name: 'Nome',
   none: 'Não refinar',
 };
 
 export function RefineSearch() {
-  const [itemSelectedInSearchRefinement, setItemSelectedInSearchRefinement] =
-    useState<SearchRefinementItemTypes>('none');
+  const [selectedItem, setSelectedItem] = useState<SelectableItemTypes>('none');
 
   return (
     <DropdownMenuRoot>
       <DropdownMenuTrigger>
-        {itemSelectedInSearchRefinement !== 'none' ? (
-          <span>{searchRefinementItems[itemSelectedInSearchRefinement]}</span>
+        {selectedItem !== 'none' ? (
+          <span>{selectableItems[selectedItem]}</span>
         ) : (
           <Faders />
         )}
@@ -37,19 +36,13 @@ export function RefineSearch() {
         <DropdownMenuLabel>Refinar busca</DropdownMenuLabel>
 
         <DropdownMenuGroup>
-          <DropdownMenuItem
-            onSelect={() => setItemSelectedInSearchRefinement('sku')}
-          >
+          <DropdownMenuItem onSelect={() => setSelectedItem('name')}>
+            Nome
+          </DropdownMenuItem>
+          <DropdownMenuItem onSelect={() => setSelectedItem('sku')}>
             Código SKU
           </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setItemSelectedInSearchRefinement('gtin_ean')}
-          >
-            GTIN/EAN
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setItemSelectedInSearchRefinement('none')}
-          >
+          <DropdownMenuItem onSelect={() => setSelectedItem('none')}>
             Não refinar
           </DropdownMenuItem>
         </DropdownMenuGroup>
