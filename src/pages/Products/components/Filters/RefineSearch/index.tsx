@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from './styles';
 
-type SelectableItemTypes = keyof typeof selectableItems;
+export type SelectableItemTypes = keyof typeof selectableItems;
 
 const selectableItems = {
   sku: 'SKU',
@@ -24,7 +24,7 @@ export function RefineSearch() {
 
   return (
     <DropdownMenuRoot>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger selectedItem={selectedItem}>
         {selectedItem !== 'none' ? (
           <span>{selectableItems[selectedItem]}</span>
         ) : (
@@ -36,13 +36,25 @@ export function RefineSearch() {
         <DropdownMenuLabel>Refinar busca</DropdownMenuLabel>
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onSelect={() => setSelectedItem('name')}>
+          <DropdownMenuItem
+            onSelect={() => setSelectedItem('name')}
+            selectedItem={selectedItem}
+            itemValue="name"
+          >
             Nome
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => setSelectedItem('sku')}>
+          <DropdownMenuItem
+            onSelect={() => setSelectedItem('sku')}
+            selectedItem={selectedItem}
+            itemValue="sku"
+          >
             Código SKU
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => setSelectedItem('none')}>
+          <DropdownMenuItem
+            onSelect={() => setSelectedItem('none')}
+            selectedItem={selectedItem}
+            itemValue="none"
+          >
             Não refinar
           </DropdownMenuItem>
         </DropdownMenuGroup>

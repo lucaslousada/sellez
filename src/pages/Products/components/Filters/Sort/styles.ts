@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SelectableItemTypes } from '.';
 
 import {
   buttonForFilters,
@@ -14,6 +15,11 @@ import {
   Label,
   Trigger,
 } from '@radix-ui/react-dropdown-menu';
+
+interface DropdownMenuItemProps {
+  selectedItem: SelectableItemTypes;
+  itemValue: SelectableItemTypes;
+}
 
 export const DropdownMenuTrigger = styled(Trigger)`
   ${buttonForFilters}
@@ -31,6 +37,9 @@ export const DropdownMenuGroup = styled(Group)`
   ${group}
 `;
 
-export const DropdownMenuItem = styled(Item)`
+export const DropdownMenuItem = styled(Item)<DropdownMenuItemProps>`
   ${buttonForFilters}
+
+  color: ${({ theme, itemValue, selectedItem }) =>
+    itemValue === selectedItem ? theme.colors.main : theme.colors.color_900};
 `;

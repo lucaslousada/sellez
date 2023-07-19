@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from './styles';
 
-type SelectableItemTypes = keyof typeof selectableItems;
+export type SelectableItemTypes = keyof typeof selectableItems;
 
 const selectableItems = {
   name: 'Nome',
@@ -33,13 +33,25 @@ export function Sort() {
         <DropdownMenuLabel>Ordernar por</DropdownMenuLabel>
 
         <DropdownMenuGroup>
-          <DropdownMenuItem onSelect={() => setSelectedItem('name')}>
+          <DropdownMenuItem
+            onSelect={() => setSelectedItem('name')}
+            selectedItem={selectedItem}
+            itemValue="name"
+          >
             Nome
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => setSelectedItem('last')}>
+          <DropdownMenuItem
+            onSelect={() => setSelectedItem('last')}
+            selectedItem={selectedItem}
+            itemValue="last"
+          >
             Mais recentes
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => setSelectedItem('sku')}>
+          <DropdownMenuItem
+            onSelect={() => setSelectedItem('sku')}
+            selectedItem={selectedItem}
+            itemValue="sku"
+          >
             Código SKU
           </DropdownMenuItem>
         </DropdownMenuGroup>

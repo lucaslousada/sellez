@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SelectableItemTypes } from '.';
 
 import {
   Content,
@@ -8,7 +9,16 @@ import {
   Trigger,
 } from '@radix-ui/react-dropdown-menu';
 
-export const DropdownMenuTrigger = styled(Trigger)`
+interface DropdownMenuTriggerProps {
+  selectedItem: SelectableItemTypes;
+}
+
+interface DropdownMenuItemProps {
+  selectedItem: SelectableItemTypes;
+  itemValue: SelectableItemTypes;
+}
+
+export const DropdownMenuTrigger = styled(Trigger)<DropdownMenuTriggerProps>`
   display: flex;
   padding: 6.5px;
   margin-left: 8px;
@@ -21,6 +31,8 @@ export const DropdownMenuTrigger = styled(Trigger)`
   span {
     padding: 0 4px;
     font-size: 14px;
+    color: ${({ theme, selectedItem }) =>
+      selectedItem !== 'none' ? theme.colors.main : theme.colors.color_900};
   }
 
   svg {
@@ -56,13 +68,15 @@ export const DropdownMenuGroup = styled(Group)`
   gap: 2px 0;
 `;
 
-export const DropdownMenuItem = styled(Item)`
+export const DropdownMenuItem = styled(Item)<DropdownMenuItemProps>`
   padding: 6px 8px;
   font-size: 15px;
-  color: ${({ theme }) => theme.colors.color_900};
   outline: none;
   cursor: pointer;
   transition: color ${({ theme }) => theme.transitions.default};
+
+  color: ${({ theme, itemValue, selectedItem }) =>
+    itemValue === selectedItem ? theme.colors.main : theme.colors.color_900};
 
   &[data-highlighted] {
     color: ${({ theme }) => theme.colors.main};
