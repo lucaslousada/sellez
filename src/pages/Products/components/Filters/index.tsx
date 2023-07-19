@@ -1,8 +1,9 @@
 import { RefineSearch } from './RefineSearch';
+import { Sort } from './Sort';
 
 import { MagnifyingGlass } from 'phosphor-react';
 
-import { Container, SearchBar } from './styles';
+import { Container, MultipleFilters, SearchBar } from './styles';
 
 export function Filters() {
   return (
@@ -15,6 +16,11 @@ export function Filters() {
         />
         <RefineSearch />
       </SearchBar>
+      <MultipleFilters>
+        <li>
+          <Sort />
+        </li>
+      </MultipleFilters>
     </Container>
   );
 }
