@@ -10,19 +10,14 @@ import {
 
 import {
   Content,
-  Group,
-  Item,
+  RadioGroup,
+  RadioItem,
   Label,
   Trigger,
 } from '@radix-ui/react-dropdown-menu';
 
 interface DropdownMenuTriggerProps {
   selectedItem: SelectableItemTypes;
-}
-
-interface DropdownMenuItemProps {
-  selectedItem: SelectableItemTypes;
-  itemValue: SelectableItemTypes;
 }
 
 export const DropdownMenuTrigger = styled(Trigger)<DropdownMenuTriggerProps>`
@@ -40,13 +35,14 @@ export const DropdownMenuLabel = styled(Label)`
   ${label}
 `;
 
-export const DropdownMenuGroup = styled(Group)`
+export const DropdownMenuRadioGroup = styled(RadioGroup)`
   ${group}
 `;
 
-export const DropdownMenuItem = styled(Item)<DropdownMenuItemProps>`
+export const DropdownMenuRadioItem = styled(RadioItem)`
   ${buttonForFilters}
 
-  color: ${({ theme, itemValue, selectedItem }) =>
-    itemValue === selectedItem ? theme.colors.main : theme.colors.color_900};
+  &[data-state='checked'] {
+    color: ${({ theme }) => theme.colors.main};
+  }
 `;

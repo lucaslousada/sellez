@@ -5,13 +5,13 @@ import { Faders } from 'phosphor-react';
 
 import {
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from './styles';
 
-export type SelectableItemTypes = keyof typeof selectableItems;
+type SelectableItemTypes = keyof typeof selectableItems;
 
 const selectableItems = {
   sku: 'SKU',
@@ -24,7 +24,7 @@ export function RefineSearch() {
 
   return (
     <DropdownMenuRoot>
-      <DropdownMenuTrigger selectedItem={selectedItem}>
+      <DropdownMenuTrigger>
         {selectedItem !== 'none' ? (
           <span>{selectableItems[selectedItem]}</span>
         ) : (
@@ -35,29 +35,16 @@ export function RefineSearch() {
       <DropdownMenuContent>
         <DropdownMenuLabel>Refinar busca</DropdownMenuLabel>
 
-        <DropdownMenuGroup>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('name')}
-            selectedItem={selectedItem}
-            itemValue="name"
-          >
-            Nome
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('sku')}
-            selectedItem={selectedItem}
-            itemValue="sku"
-          >
-            Código SKU
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('none')}
-            selectedItem={selectedItem}
-            itemValue="none"
-          >
+        <DropdownMenuRadioGroup
+          value={selectedItem}
+          onValueChange={setSelectedItem as (value: string) => void}
+        >
+          <DropdownMenuRadioItem value="name">Nome</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="sku">Código SKU</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="none">
             Não refinar
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
+          </DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenuRoot>
   );

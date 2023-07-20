@@ -5,13 +5,13 @@ import { SortAscending } from 'phosphor-react';
 
 import {
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from './styles';
 
-export type SelectableItemTypes = keyof typeof selectableItems;
+type SelectableItemTypes = keyof typeof selectableItems;
 
 const selectableItems = {
   name: 'Nome',
@@ -32,29 +32,16 @@ export function Sort() {
       <DropdownMenuContent align="start">
         <DropdownMenuLabel>Ordernar por</DropdownMenuLabel>
 
-        <DropdownMenuGroup>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('name')}
-            selectedItem={selectedItem}
-            itemValue="name"
-          >
-            Nome
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('last')}
-            selectedItem={selectedItem}
-            itemValue="last"
-          >
+        <DropdownMenuRadioGroup
+          value={selectedItem}
+          onValueChange={setSelectedItem as (value: string) => void}
+        >
+          <DropdownMenuRadioItem value="name">Nome</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="last">
             Mais recentes
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('sku')}
-            selectedItem={selectedItem}
-            itemValue="sku"
-          >
-            Código SKU
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="sku">Código SKU</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenuRoot>
   );

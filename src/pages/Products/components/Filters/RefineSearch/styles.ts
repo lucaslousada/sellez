@@ -1,24 +1,14 @@
 import styled from 'styled-components';
-import { SelectableItemTypes } from '.';
 
 import {
   Content,
-  Group,
-  Item,
+  RadioGroup,
+  RadioItem,
   Label,
   Trigger,
 } from '@radix-ui/react-dropdown-menu';
 
-interface DropdownMenuTriggerProps {
-  selectedItem: SelectableItemTypes;
-}
-
-interface DropdownMenuItemProps {
-  selectedItem: SelectableItemTypes;
-  itemValue: SelectableItemTypes;
-}
-
-export const DropdownMenuTrigger = styled(Trigger)<DropdownMenuTriggerProps>`
+export const DropdownMenuTrigger = styled(Trigger)`
   display: flex;
   padding: 6.5px;
   margin-left: 8px;
@@ -31,8 +21,7 @@ export const DropdownMenuTrigger = styled(Trigger)<DropdownMenuTriggerProps>`
   span {
     padding: 0 4px;
     font-size: 14px;
-    color: ${({ theme, selectedItem }) =>
-      selectedItem !== 'none' ? theme.colors.main : theme.colors.color_900};
+    color: ${({ theme }) => theme.colors.main};
   }
 
   svg {
@@ -62,24 +51,27 @@ export const DropdownMenuLabel = styled(Label)`
   color: ${({ theme }) => theme.colors.color_700};
 `;
 
-export const DropdownMenuGroup = styled(Group)`
+export const DropdownMenuRadioGroup = styled(RadioGroup)`
   display: flex;
   flex-direction: column;
   gap: 2px 0;
 `;
 
-export const DropdownMenuItem = styled(Item)<DropdownMenuItemProps>`
+export const DropdownMenuRadioItem = styled(RadioItem)`
   padding: 6px 8px;
   font-size: 15px;
   cursor: pointer;
-  transition: color ${({ theme }) => theme.transitions.default};
+  transition: background-color ${({ theme }) => theme.transitions.default};
+  color: ${({ theme }) => theme.colors.color_900};
+  border-radius: 5px;
+  outline: none;
 
-  color: ${({ theme, itemValue, selectedItem }) =>
-    itemValue === selectedItem ? theme.colors.main : theme.colors.color_900};
+  &[data-state='checked'] {
+    color: ${({ theme }) => theme.colors.main};
+  }
 
   &[data-highlighted],
   &:focus {
-    outline: none;
-    color: ${({ theme }) => theme.colors.main};
+    background-color: ${({ theme }) => theme.colors.color_400};
   }
 `;

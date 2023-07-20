@@ -3,8 +3,8 @@ import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu';
 
 import {
   DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from './styles';
@@ -31,36 +31,19 @@ export function Status() {
       <DropdownMenuContent align="start">
         <DropdownMenuLabel>Situação</DropdownMenuLabel>
 
-        <DropdownMenuGroup>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('active')}
-            selectedItem={selectedItem}
-            itemValue="active"
-          >
-            Ativos
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('inactivated')}
-            selectedItem={selectedItem}
-            itemValue="inactivated"
-          >
+        <DropdownMenuRadioGroup
+          value={selectedItem}
+          onValueChange={setSelectedItem as (value: string) => void}
+        >
+          <DropdownMenuRadioItem value="active">Ativos</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="inactivated">
             Inativos
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('deleted')}
-            selectedItem={selectedItem}
-            itemValue="deleted"
-          >
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="deleted">
             Excluídos
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onSelect={() => setSelectedItem('none')}
-            selectedItem={selectedItem}
-            itemValue="none"
-          >
-            Sem filtro
-          </DropdownMenuItem>
-        </DropdownMenuGroup>
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="none">Sem filtro</DropdownMenuRadioItem>
+        </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenuRoot>
   );
