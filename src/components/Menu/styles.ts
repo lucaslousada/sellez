@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Trigger, Root, List } from '@radix-ui/react-tabs';
+import { Trigger, Root, List, Content } from '@radix-ui/react-tabs';
 
 interface ContainerTabsContentProps {
   isTheTabVisible: string;
@@ -12,12 +12,17 @@ export const TabsRoot = styled(Root)`
   height: 100vh;
 `;
 
+export const TabsContent = styled(Content)`
+  &:focus {
+    outline: none;
+  }
+`;
+
 export const TabsList = styled(List)`
   z-index: 1;
   overflow: auto;
   width: min-content;
   padding: 30px 15px 20px;
-
   background-color: ${({ theme }) => theme.colors.color_100};
 `;
 

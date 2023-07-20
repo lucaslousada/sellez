@@ -1,10 +1,14 @@
 import styled from 'styled-components';
 
+interface SearchBarProps {
+  inputFieldHasFocus: boolean;
+}
+
 export const Container = styled.div`
   margin-top: 10px;
 `;
 
-export const SearchBar = styled.div`
+export const SearchBar = styled.div<SearchBarProps>`
   display: flex;
   align-items: center;
   max-width: 540px;
@@ -12,6 +16,9 @@ export const SearchBar = styled.div`
   background-color: ${({ theme }) => theme.colors.color_200};
   border: 1px solid ${({ theme }) => theme.colors.transparent_color_100};
   border-radius: 5px;
+
+  outline: ${({ theme, inputFieldHasFocus }) =>
+    inputFieldHasFocus && `2px solid` + theme.colors.main};
 
   input {
     flex: 1;

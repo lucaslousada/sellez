@@ -47,18 +47,19 @@ export const BackToPreviousPage = styled.button`
 `;
 
 export const LinkHomePage = styled.li`
-  transition: color ${({ theme }) => theme.transitions.default};
-
   a {
+    outline: none;
     line-height: 0;
 
     svg {
       width: 24px;
       height: 24px;
+      transition: color ${({ theme }) => theme.transitions.default};
     }
   }
 
-  &:hover a svg {
-    color: ${({ theme }) => theme.colors.color_900};
+  &:hover a svg,
+  a:focus svg {
+    color: ${({ theme }) => theme.colors.main};
   }
 `;

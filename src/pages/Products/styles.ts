@@ -45,10 +45,19 @@ export const TabsTrigger = styled(Trigger)`
       background-color: ${({ theme }) => theme.colors.color_900};
     }
   }
+
+  &:focus {
+    outline: none;
+    color: ${({ theme }) => theme.colors.main};
+  }
 `;
 
 export const TabsContent = styled(Content)`
   padding-top: 20px;
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 export const Table = styled.table`

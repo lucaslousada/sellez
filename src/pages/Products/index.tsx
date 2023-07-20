@@ -68,6 +68,7 @@ export function Products() {
         <TabsRoot
           value={displayedProductTypeTab}
           onValueChange={setDisplayedProductTypeTab as (value: string) => void}
+          activationMode="manual"
         >
           <TabsList>
             <TabsTrigger value="all">

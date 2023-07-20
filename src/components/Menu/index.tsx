@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { NavLink } from 'react-router-dom';
-import { Content as TabsContent } from '@radix-ui/react-tabs';
 import { ReactComponent as LogoImg } from '../../assets/logo.svg';
 
 import {
@@ -15,6 +14,7 @@ import {
 import {
   TabsTrigger,
   TabsRoot,
+  TabsContent,
   TabsList,
   ContainerTabsContent,
   MinimizeMenuButton,
@@ -57,6 +57,8 @@ export function Menu() {
     <TabsRoot
       value={selectedMenuGroup}
       onValueChange={setSelectedMenuGroup as (value: string) => void}
+      orientation="vertical"
+      activationMode="manual"
     >
       <TabsList>
         <Logo>

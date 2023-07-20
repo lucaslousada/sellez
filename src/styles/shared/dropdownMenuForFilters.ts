@@ -27,7 +27,7 @@ export const buttonForFilters = css`
   display: flex;
   align-items: center;
   gap: 0 2px;
-  padding: 6px 10px;
+  padding: 8px 16px;
   background-color: ${({ theme }) => theme.colors.color_300};
   border: 1px solid ${({ theme }) => theme.colors.transparent_color_100};
   border-radius: 20px;

@@ -7,9 +7,9 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  /* *:focus{
+  *:focus{
     outline: 0.125rem solid ${({ theme }) => theme.colors.main};
-  } */
+  }
 
   html {
     @media (max-width: 1080px) {

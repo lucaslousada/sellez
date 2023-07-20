@@ -71,14 +71,15 @@ export const DropdownMenuGroup = styled(Group)`
 export const DropdownMenuItem = styled(Item)<DropdownMenuItemProps>`
   padding: 6px 8px;
   font-size: 15px;
-  outline: none;
   cursor: pointer;
   transition: color ${({ theme }) => theme.transitions.default};
 
   color: ${({ theme, itemValue, selectedItem }) =>
     itemValue === selectedItem ? theme.colors.main : theme.colors.color_900};
 
-  &[data-highlighted] {
+  &[data-highlighted],
+  &:focus {
+    outline: none;
     color: ${({ theme }) => theme.colors.main};
   }
 `;
