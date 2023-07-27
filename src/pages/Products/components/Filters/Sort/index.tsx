@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu';
+import { ProductsContext } from '../../../../../contexts/ProcuctsContext';
 
 import { SortAscending } from 'phosphor-react';
 
@@ -11,34 +12,48 @@ import {
   DropdownMenuTrigger,
 } from './styles';
 
-type SelectableItemTypes = keyof typeof selectableItems;
+type SortFilterItemType = keyof typeof sortFilterItems;
 
-const selectableItems = {
+const sortFilterItems = {
   name: 'Nome',
-  last: 'Mais recente',
+  most_recent: 'Mais recente',
+  update_date: 'Data de atualização',
   sku: 'SKU',
 };
 
 export function Sort() {
-  const [selectedItem, setSelectedItem] = useState<SelectableItemTypes>('name');
+  const { changeProductList, activeFilters, changeActiveFilters } =
+    useContext(ProductsContext);
+    
+  const [activeSortFilter, setActiveSortFilter] = useState<SortFilterItemType>(
+    activeFilters.sort
+  );
+
+  useEffect(() => {
+    changeProductList([]);
+    changeActiveFilters({ ...activeFilters, sort: activeSortFilter });
+  }, [activeSortFilter]);
 
   return (
     <DropdownMenuRoot>
       <DropdownMenuTrigger title="Ordenação">
         <SortAscending />
-        {selectableItems[selectedItem]}
+        {sortFilterItems[activeSortFilter]}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="start">
         <DropdownMenuLabel>Ordernar por</DropdownMenuLabel>
 
         <DropdownMenuRadioGroup
-          value={selectedItem}
-          onValueChange={setSelectedItem as (value: string) => void}
+          value={activeSortFilter}
+          onValueChange={setActiveSortFilter as (value: string) => void}
         >
           <DropdownMenuRadioItem value="name">Nome</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="last">
+          <DropdownMenuRadioItem value="most_recent">
             Mais recentes
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="update_date">
+            Data de atualização
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="sku">Código SKU</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
