@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu';
+import { ProductsContext } from '../../../../../contexts/ProcuctsContext';
 
 import {
   DropdownMenuContent,
@@ -9,31 +10,37 @@ import {
   DropdownMenuTrigger,
 } from './styles';
 
-export type SelectableItemTypes = keyof typeof selectableItems;
+export type StatusFilterItemType = keyof typeof statusFilterItems;
 
-const selectableItems = {
+const statusFilterItems = {
   active: 'Produtos ativos',
   inactivated: 'Produtos inativos',
   deleted: 'Produtos excluídos',
-  none: 'Por situação',
+  all: 'Por situação',
 };
 
 export function Status() {
-  const [selectedItem, setSelectedItem] =
-    useState<SelectableItemTypes>('active');
+  const { activeFilters, changeActiveFilters } = useContext(ProductsContext);
+
+  const [activeStatusFilter, setActiveStatusFilter] =
+    useState<StatusFilterItemType>(activeFilters.status);
+
+  useEffect(() => {
+    changeActiveFilters({ ...activeFilters, status: activeStatusFilter });
+  }, [activeStatusFilter]);
 
   return (
     <DropdownMenuRoot>
-      <DropdownMenuTrigger selectedItem={selectedItem} title="Situação">
-        {selectableItems[selectedItem]}
+      <DropdownMenuTrigger selectedItem={activeStatusFilter} title="Situação">
+        {statusFilterItems[activeStatusFilter]}
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="start">
         <DropdownMenuLabel>Situação</DropdownMenuLabel>
 
         <DropdownMenuRadioGroup
-          value={selectedItem}
-          onValueChange={setSelectedItem as (value: string) => void}
+          value={activeStatusFilter}
+          onValueChange={setActiveStatusFilter as (value: string) => void}
         >
           <DropdownMenuRadioItem value="active">Ativos</DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="inactivated">
@@ -42,7 +49,7 @@ export function Status() {
           <DropdownMenuRadioItem value="deleted">
             Excluídos
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="none">Sem filtro</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem value="all">Sem filtro</DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenuRoot>
