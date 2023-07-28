@@ -1,58 +1,50 @@
-import { useContext, useState } from 'react';
-import { Root as TabsRoot } from '@radix-ui/react-tabs';
+import { useContext } from 'react';
 import { ProductsContext } from '../../../../contexts/ProcuctsContext';
 import { LoadingSpinner } from '../../../../components/LoadingSpinner';
+import { TypeOfProducts } from '../Filters/TypeOfProducts';
 
-import { Table, TabsContent, TabsList, TabsTrigger } from './styles';
-
-type TypesOfProducts = 'all' | 'simple';
+import { Table } from './styles';
 
 export function ProductTable() {
-  const { products } = useContext(ProductsContext);
+  const { products, isLoadingProducts } = useContext(ProductsContext);
 
-  const [activeProductTypeFilter, setActiveProductTypeFilter] =
-    useState<TypesOfProducts>('all');
+  if (isLoadingProducts)
+    return (
+      <TypeOfProducts>
+        <LoadingSpinner size="38px" color="color_700" />
+      </TypeOfProducts>
+    );
 
-  return (
-    <TabsRoot
-      value={activeProductTypeFilter}
-      onValueChange={setActiveProductTypeFilter as (value: string) => void}
-      activationMode="manual"
-    >
-      <TabsList>
-        <TabsTrigger value="all">
-          todos <p>127</p>
-        </TabsTrigger>
-        <TabsTrigger value="simple">
-          simples <p>110</p>
-        </TabsTrigger>
-      </TabsList>
-      <TabsContent value={activeProductTypeFilter}>
-        {!products?.length ? (
-          <LoadingSpinner size="38px" color="color_700" />
-        ) : (
-          <Table>
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>SKU</th>
-                <th>Preço</th>
-                <th>Estoque</th>
+  if (!isLoadingProducts && !products.length)
+    return (
+      <TypeOfProducts>
+        <p>Nada encontrado</p>
+      </TypeOfProducts>
+    );
+
+  if (!isLoadingProducts && products.length)
+    return (
+      <TypeOfProducts>
+        <Table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>SKU</th>
+              <th>Preço</th>
+              <th>Estoque</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map(product => (
+              <tr key={product.id}>
+                <td>{product.name}</td>
+                <td>{product.sku}</td>
+                <td>{`R$ ${product.sale_price}`}</td>
+                <td>{product.stock}</td>
               </tr>
-            </thead>
-            <tbody>
-              {products.map(product => (
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.sku}</td>
-                  <td>{`R$ ${product.sale_price}`}</td>
-                  <td>{product.stock}</td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
-      </TabsContent>
-    </TabsRoot>
-  );
+            ))}
+          </tbody>
+        </Table>
+      </TypeOfProducts>
+    );
 }

@@ -8,6 +8,8 @@ import {
 } from 'react';
 import { AxiosError } from 'axios';
 import { api } from '../services/api';
+import { SortFilterItemType } from '../pages/Products/components/Filters/Sort';
+import { StatusFilterItemType } from '../pages/Products/components/Filters/Status';
 
 interface ProductData {
   id: number;
@@ -30,8 +32,8 @@ interface ProductData {
 interface ProductFilters {
   page: number;
   itemsPerPage: number;
-  sort: 'name' | 'most_recent' | 'update_date' | 'sku';
-  status: 'active' | 'disabled' | 'deleted';
+  sort: SortFilterItemType;
+  status: StatusFilterItemType;
 }
 
 interface ProductsProviderProps {
@@ -40,7 +42,7 @@ interface ProductsProviderProps {
 
 interface ProductsContextData {
   products: ProductData[];
-  changeProductList: Dispatch<SetStateAction<ProductData[]>>;
+  isLoadingProducts: boolean;
   activeFilters: ProductFilters;
   changeActiveFilters: Dispatch<SetStateAction<ProductFilters>>;
 }
@@ -51,6 +53,7 @@ export const ProductsContext = createContext<ProductsContextData>(
 
 export function ProductsProvider({ children }: ProductsProviderProps) {
   const [products, setProducts] = useState<ProductData[]>([]);
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
   const [activeFilters, setActiveFilters] = useState<ProductFilters>({
     page: 1,
     itemsPerPage: 100,
@@ -59,22 +62,34 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
   });
 
   async function loadProducts() {
+    setProducts([]);
+
     const filters = {
       page: `_page=${activeFilters.page}`,
       itemsPerPage: `_limit=${activeFilters.itemsPerPage}`,
       sort: `_sort=${activeFilters.sort}`,
+      status:
+        activeFilters.status === 'all'
+          ? null
+          : `status=${activeFilters.status}`,
     };
 
-    await api
-      .get<ProductData[]>(`/products?${Object.values(filters).join('&')}`)
-      .then(
-        response => setProducts(response.data),
-        (error: AxiosError) => {
-          throw new Error(
-            `Falha ao buscar os dados dos produtos. (${error.message})`
-          );
-        }
-      );
+    const urlParameters = Object.values(filters).filter(
+      filterItem => filterItem !== null
+    );
+
+    setIsLoadingProducts(true);
+
+    await api.get<ProductData[]>(`/products?${urlParameters.join('&')}`).then(
+      response => setProducts(response.data),
+      (error: AxiosError) => {
+        throw new Error(
+          `Falha ao buscar os dados dos produtos. (${error.message})`
+        );
+      }
+    );
+
+    setIsLoadingProducts(false);
   }
 
   useEffect(() => {
@@ -85,7 +100,7 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
     <ProductsContext.Provider
       value={{
         products,
-        changeProductList: setProducts,
+        isLoadingProducts,
         activeFilters,
         changeActiveFilters: setActiveFilters,
       }}

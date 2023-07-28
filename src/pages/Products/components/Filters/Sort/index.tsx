@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
 } from './styles';
 
-type SortFilterItemType = keyof typeof sortFilterItems;
+export type SortFilterItemType = keyof typeof sortFilterItems;
 
 const sortFilterItems = {
   name: 'Nome',
@@ -22,15 +22,13 @@ const sortFilterItems = {
 };
 
 export function Sort() {
-  const { changeProductList, activeFilters, changeActiveFilters } =
-    useContext(ProductsContext);
-    
+  const { activeFilters, changeActiveFilters } = useContext(ProductsContext);
+
   const [activeSortFilter, setActiveSortFilter] = useState<SortFilterItemType>(
     activeFilters.sort
   );
 
   useEffect(() => {
-    changeProductList([]);
     changeActiveFilters({ ...activeFilters, sort: activeSortFilter });
   }, [activeSortFilter]);
 
