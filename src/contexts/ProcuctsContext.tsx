@@ -10,6 +10,7 @@ import { AxiosError } from 'axios';
 import { api } from '../services/api';
 import { SortFilterItemType } from '../pages/Products/components/Filters/Sort';
 import { StatusFilterItemType } from '../pages/Products/components/Filters/Status';
+import { OverlayWhileCharging } from '../styles/components/OverlayWhileCharging';
 
 interface ProductData {
   id: number;
@@ -105,6 +106,7 @@ export function ProductsProvider({ children }: ProductsProviderProps) {
         changeActiveFilters: setActiveFilters,
       }}
     >
+      {isLoadingProducts && <OverlayWhileCharging />}
       {children}
     </ProductsContext.Provider>
   );
