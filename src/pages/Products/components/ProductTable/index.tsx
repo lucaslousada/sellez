@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { ProductsContext } from '../../../../contexts/ProcuctsContext';
-import { LoadingSpinner } from '../../../../components/LoadingSpinner';
 import { TypeOfProducts } from '../Filters/TypeOfProducts';
+import { LoadingSpinner } from '../../../../components/LoadingSpinner';
+import { NoRecordsFound } from '../../../../components/NoRecordsFound';
 
 import { Table } from './styles';
 
@@ -18,7 +19,10 @@ export function ProductTable() {
   if (!isLoadingProducts && !products.length)
     return (
       <TypeOfProducts>
-        <p>Nada encontrado</p>
+        <NoRecordsFound
+          title="Nenhum resultado encontrado."
+          description="Experimente utilizar outras opções de busca."
+        />
       </TypeOfProducts>
     );
 

@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { Content, List, Trigger } from '@radix-ui/react-tabs';
+import { Root, Content, List, Trigger } from '@radix-ui/react-tabs';
+
+export const TabsRoot = styled(Root)`
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`;
 
 export const TabsList = styled(List)`
   display: flex;
@@ -39,6 +45,7 @@ export const TabsTrigger = styled(Trigger)`
 
 export const TabsContent = styled(Content)`
   padding-top: 20px;
+  flex-grow: 1;
 
   &:focus {
     outline: none;

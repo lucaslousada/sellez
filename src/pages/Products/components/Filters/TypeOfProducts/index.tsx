@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react';
-import { Root as TabsRoot } from '@radix-ui/react-tabs';
 
-import { TabsList, TabsTrigger, TabsContent } from './styles';
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from './styles';
 
 interface TypeOfProductsProps {
   children: ReactNode;
