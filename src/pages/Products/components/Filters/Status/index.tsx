@@ -1,6 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
-import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu';
-import { ProductsContext } from '../../../../../contexts/ProcuctsContext';
+import { useContext, useState } from 'react'
+import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu'
+import { ProductsContext } from '../../../../../contexts/ProcuctsContext'
 
 import {
   DropdownMenuContent,
@@ -8,50 +8,81 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from './styles';
+  DropdownMenuTriggerContent,
+} from './styles'
 
-export type StatusFilterItemType = keyof typeof statusFilterItems;
+export type StatusFilterItemType = keyof typeof statusFilterItems | null
 
 const statusFilterItems = {
   active: 'Produtos ativos',
   inactivated: 'Produtos inativos',
   deleted: 'Produtos excluídos',
-  all: 'Por situação',
-};
+}
 
-export function Status() {
-  const { activeFilters, changeActiveFilters } = useContext(ProductsContext);
+export function Status(): JSX.Element {
+  const { activeQueryParameters, changeActiveQueryParameters } =
+    useContext(ProductsContext)
 
   const [activeStatusFilter, setActiveStatusFilter] =
-    useState<StatusFilterItemType>(activeFilters.status);
+    useState<StatusFilterItemType>(activeQueryParameters.status)
 
-  useEffect(() => {
-    changeActiveFilters({ ...activeFilters, status: activeStatusFilter });
-  }, [activeStatusFilter]);
+  function changeStatusFilter(filterValue: StatusFilterItemType): void {
+    setActiveStatusFilter(filterValue)
+
+    changeActiveQueryParameters({
+      ...activeQueryParameters,
+      status: filterValue,
+    })
+  }
 
   return (
     <DropdownMenuRoot>
-      <DropdownMenuTrigger selectedItem={activeStatusFilter} title="Situação">
-        {statusFilterItems[activeStatusFilter]}
+      <DropdownMenuTrigger title="Situação">
+        <DropdownMenuTriggerContent selectedItem={activeStatusFilter}>
+          {activeStatusFilter !== null
+            ? statusFilterItems[activeStatusFilter]
+            : 'Por situação'}
+        </DropdownMenuTriggerContent>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="start">
         <DropdownMenuLabel>Situação</DropdownMenuLabel>
 
-        <DropdownMenuRadioGroup
-          value={activeStatusFilter}
-          onValueChange={setActiveStatusFilter as (value: string) => void}
-        >
-          <DropdownMenuRadioItem value="active">Ativos</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="inactivated">
+        <DropdownMenuRadioGroup>
+          <DropdownMenuRadioItem
+            value="active"
+            onSelect={() => {
+              changeStatusFilter('active')
+            }}
+          >
+            Ativos
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem
+            value="inactivated"
+            onSelect={() => {
+              changeStatusFilter('inactivated')
+            }}
+          >
             Inativos
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="deleted">
+          <DropdownMenuRadioItem
+            value="deleted"
+            onSelect={() => {
+              changeStatusFilter('deleted')
+            }}
+          >
             Excluídos
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="all">Sem filtro</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem
+            value="null"
+            onSelect={() => {
+              changeStatusFilter(null)
+            }}
+          >
+            Sem filtro
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenuRoot>
-  );
+  )
 }

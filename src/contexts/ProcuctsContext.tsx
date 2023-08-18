@@ -1,113 +1,108 @@
 import {
-  Dispatch,
-  ReactNode,
-  SetStateAction,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
   createContext,
   useEffect,
   useState,
-} from 'react';
-import { AxiosError } from 'axios';
-import { api } from '../services/api';
-import { SortFilterItemType } from '../pages/Products/components/Filters/Sort';
-import { StatusFilterItemType } from '../pages/Products/components/Filters/Status';
-import { OverlayWhileCharging } from '../styles/components/OverlayWhileCharging';
+} from 'react'
+import { type AxiosError } from 'axios'
+import { type SortFilterItemType } from '../pages/Products/components/Filters/Sort'
+import { type StatusFilterItemType } from '../pages/Products/components/Filters/Status'
+import { api } from '../services/api'
+
+import { OverlayWhileCharging } from '../styles/components/OverlayWhileCharging'
 
 interface ProductData {
-  id: number;
-  status: string;
-  sku: number;
-  name: string;
-  stock: number;
-  sale_price: number;
-  brand: string;
-  net_weight: number;
-  gross_weight: number;
-  volume_quantity: number;
-  width: number;
-  height: number;
-  length: number;
-  created_at: string;
-  update_date: string;
+  id: number
+  status: string
+  sku: number
+  name: string
+  stock: number
+  sale_price: number
+  brand: string
+  net_weight: number
+  gross_weight: number
+  volume_quantity: number
+  width: number
+  height: number
+  length: number
+  created_at: string
+  update_date: string
 }
 
-interface ProductFilters {
-  page: number;
-  itemsPerPage: number;
-  sort: SortFilterItemType;
-  status: StatusFilterItemType;
+interface ActiveQueryParameters {
+  _sort: SortFilterItemType
+  status: StatusFilterItemType
 }
 
 interface ProductsProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 interface ProductsContextData {
-  products: ProductData[];
-  isLoadingProducts: boolean;
-  activeFilters: ProductFilters;
-  changeActiveFilters: Dispatch<SetStateAction<ProductFilters>>;
+  products: ProductData[]
+  isLoadingProducts: boolean
+  activeQueryParameters: ActiveQueryParameters
+  changeActiveQueryParameters: Dispatch<SetStateAction<ActiveQueryParameters>>
 }
 
-export const ProductsContext = createContext<ProductsContextData>(
-  {} as ProductsContextData
-);
+const defaultActiveQueryParameters: ActiveQueryParameters = {
+  _sort: 'created_at',
+  status: 'active',
+}
 
-export function ProductsProvider({ children }: ProductsProviderProps) {
-  const [products, setProducts] = useState<ProductData[]>([]);
-  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
-  const [activeFilters, setActiveFilters] = useState<ProductFilters>({
-    page: 1,
-    itemsPerPage: 100,
-    sort: 'most_recent',
-    status: 'active',
-  });
+export const ProductsContext = createContext<ProductsContextData>({
+  products: [],
+  isLoadingProducts: false,
+  activeQueryParameters: defaultActiveQueryParameters,
+  changeActiveQueryParameters: () => {},
+})
 
-  async function loadProducts() {
-    setProducts([]);
+export function ProductsProvider({
+  children,
+}: ProductsProviderProps): JSX.Element {
+  const [products, setProducts] = useState<ProductData[]>([])
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true)
+  const [activeQueryParameters, setActiveQueryParameters] =
+    useState<ActiveQueryParameters>(defaultActiveQueryParameters)
 
-    const filters = {
-      page: `_page=${activeFilters.page}`,
-      itemsPerPage: `_limit=${activeFilters.itemsPerPage}`,
-      sort: `_sort=${activeFilters.sort}`,
-      status:
-        activeFilters.status === 'all'
-          ? null
-          : `status=${activeFilters.status}`,
-    };
+  async function loadProducts(): Promise<void> {
+    setProducts([])
+    setIsLoadingProducts(true)
 
-    const urlParameters = Object.values(filters).filter(
-      filterItem => filterItem !== null
-    );
+    await api
+      .get<ProductData[]>('/products', { params: activeQueryParameters })
 
-    setIsLoadingProducts(true);
+      .then(
+        (response) => {
+          setProducts(response.data)
+        },
+        (error: AxiosError) => {
+          throw new Error(
+            `Falha ao buscar os dados dos produtos. (${error.message})`,
+          )
+        },
+      )
 
-    await api.get<ProductData[]>(`/products?${urlParameters.join('&')}`).then(
-      response => setProducts(response.data),
-      (error: AxiosError) => {
-        throw new Error(
-          `Falha ao buscar os dados dos produtos. (${error.message})`
-        );
-      }
-    );
-
-    setIsLoadingProducts(false);
+    setIsLoadingProducts(false)
   }
 
   useEffect(() => {
-    loadProducts();
-  }, [activeFilters]);
+    loadProducts()
+  }, [activeQueryParameters])
 
   return (
     <ProductsContext.Provider
       value={{
         products,
         isLoadingProducts,
-        activeFilters,
-        changeActiveFilters: setActiveFilters,
+        activeQueryParameters,
+        changeActiveQueryParameters: setActiveQueryParameters,
       }}
     >
       {isLoadingProducts && <OverlayWhileCharging />}
       {children}
     </ProductsContext.Provider>
-  );
+  )
 }

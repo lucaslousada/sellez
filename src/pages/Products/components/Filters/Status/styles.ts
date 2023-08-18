@@ -1,12 +1,12 @@
-import styled from 'styled-components';
-import { SelectableItemTypes } from '.';
+import styled from 'styled-components'
+import { type StatusFilterItemType } from '.'
 
 import {
   buttonForFilters,
   content,
   group,
   label,
-} from '../../../../../styles/shared/dropdownMenuForFilters';
+} from '../../../../../styles/shared/dropdownMenuForFilters'
 
 import {
   Content,
@@ -14,35 +14,42 @@ import {
   RadioItem,
   Label,
   Trigger,
-} from '@radix-ui/react-dropdown-menu';
+} from '@radix-ui/react-dropdown-menu'
 
-interface DropdownMenuTriggerProps {
-  selectedItem: SelectableItemTypes;
+interface DropdownMenuTriggerContentProps {
+  selectedItem: StatusFilterItemType
 }
 
-export const DropdownMenuTrigger = styled(Trigger)<DropdownMenuTriggerProps>`
+interface DropdownMenuRadioItemProps {
+  value: StatusFilterItemType | 'null'
+}
+
+export const DropdownMenuTrigger = styled(Trigger)`
   ${buttonForFilters}
+`
 
+export const DropdownMenuTriggerContent = styled.div<DropdownMenuTriggerContentProps>`
   color: ${({ theme, selectedItem }) =>
-    selectedItem !== 'none' ? theme.colors.main : theme.colors.color_900};
-`;
-
+    selectedItem !== 'active' ? theme.colors.main : theme.colors.color_900};
+`
 export const DropdownMenuContent = styled(Content)`
   ${content}
-`;
+`
 
 export const DropdownMenuLabel = styled(Label)`
   ${label}
-`;
+`
 
 export const DropdownMenuRadioGroup = styled(RadioGroup)`
   ${group}
-`;
+`
 
-export const DropdownMenuRadioItem = styled(RadioItem)`
+export const DropdownMenuRadioItem = styled(
+  RadioItem,
+)<DropdownMenuRadioItemProps>`
   ${buttonForFilters}
 
   &[data-state='checked'] {
     color: ${({ theme }) => theme.colors.main};
   }
-`;
+`

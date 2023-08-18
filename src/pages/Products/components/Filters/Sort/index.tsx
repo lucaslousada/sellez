@@ -1,8 +1,8 @@
-import { useContext, useEffect, useState } from 'react';
-import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu';
-import { ProductsContext } from '../../../../../contexts/ProcuctsContext';
+import { useContext, useState } from 'react'
+import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu'
+import { ProductsContext } from '../../../../../contexts/ProcuctsContext'
 
-import { SortAscending } from 'phosphor-react';
+import { SortAscending } from 'phosphor-react'
 
 import {
   DropdownMenuContent,
@@ -10,52 +10,82 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from './styles';
+  DropdownMenuTriggerContent,
+} from './styles'
 
-export type SortFilterItemType = keyof typeof sortFilterItems;
+export type SortFilterItemType = keyof typeof sortFilterItems
 
 const sortFilterItems = {
   name: 'Nome',
-  most_recent: 'Mais recente',
+  created_at: 'Mais recente',
   update_date: 'Data de atualização',
   sku: 'SKU',
-};
+}
 
-export function Sort() {
-  const { activeFilters, changeActiveFilters } = useContext(ProductsContext);
+export function Sort(): JSX.Element {
+  const { activeQueryParameters, changeActiveQueryParameters } =
+    useContext(ProductsContext)
 
   const [activeSortFilter, setActiveSortFilter] = useState<SortFilterItemType>(
-    activeFilters.sort
-  );
+    activeQueryParameters._sort,
+  )
 
-  useEffect(() => {
-    changeActiveFilters({ ...activeFilters, sort: activeSortFilter });
-  }, [activeSortFilter]);
+  function changeSortFilter(filterValue: SortFilterItemType): void {
+    setActiveSortFilter(filterValue)
+
+    changeActiveQueryParameters({
+      ...activeQueryParameters,
+      _sort: filterValue,
+    })
+  }
 
   return (
     <DropdownMenuRoot>
       <DropdownMenuTrigger title="Ordenação">
-        <SortAscending />
-        {sortFilterItems[activeSortFilter]}
+        <DropdownMenuTriggerContent selectedItem={activeSortFilter}>
+          <SortAscending />
+          {sortFilterItems[activeSortFilter]}
+        </DropdownMenuTriggerContent>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent align="start">
         <DropdownMenuLabel>Ordernar por</DropdownMenuLabel>
 
-        <DropdownMenuRadioGroup
-          value={activeSortFilter}
-          onValueChange={setActiveSortFilter as (value: string) => void}
-        >
-          <DropdownMenuRadioItem value="name">Nome</DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="most_recent">
+        <DropdownMenuRadioGroup>
+          <DropdownMenuRadioItem
+            value="name"
+            onSelect={() => {
+              changeSortFilter('name')
+            }}
+          >
+            Nome
+          </DropdownMenuRadioItem>
+          <DropdownMenuRadioItem
+            value="created_at"
+            onSelect={() => {
+              changeSortFilter('created_at')
+            }}
+          >
             Mais recentes
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="update_date">
+          <DropdownMenuRadioItem
+            value="update_date"
+            onSelect={() => {
+              changeSortFilter('update_date')
+            }}
+          >
             Data de atualização
           </DropdownMenuRadioItem>
-          <DropdownMenuRadioItem value="sku">Código SKU</DropdownMenuRadioItem>
+          <DropdownMenuRadioItem
+            value="sku"
+            onSelect={() => {
+              changeSortFilter('sku')
+            }}
+          >
+            Código SKU
+          </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenuRoot>
-  );
+  )
 }
