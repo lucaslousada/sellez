@@ -1,14 +1,14 @@
-import { ProductsProvider } from '../../contexts/ProcuctsContext';
-import { Menu } from '../../components/Menu';
-import { Breadcrumbs } from '../../components/Breadcrumbs';
-import { Filters } from './components/Filters';
-import { ProductTable } from './components/ProductTable';
+import { ProductsProvider } from '../../contexts/ProcuctsContext'
+import { Menu } from '../../components/Menu'
+import { Breadcrumbs } from '../../components/Breadcrumbs'
+import { Filters } from './components/Filters'
+import { ProductTable } from './components/ProductTable'
 
-import { CaretRight } from 'phosphor-react';
+import { CaretRight } from 'phosphor-react'
 
-import { Container, Main } from './styles';
+import { Container, Main } from './styles'
 
-export function Products() {
+export function Products(): JSX.Element {
   return (
     <ProductsProvider>
       <Container>
@@ -27,5 +27,5 @@ export function Products() {
         </Main>
       </Container>
     </ProductsProvider>
-  );
+  )
 }

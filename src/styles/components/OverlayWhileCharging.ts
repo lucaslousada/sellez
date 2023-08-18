@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const OverlayWhileCharging = styled.div`
   z-index: 2;
@@ -6,4 +6,4 @@ export const OverlayWhileCharging = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-`;
+`

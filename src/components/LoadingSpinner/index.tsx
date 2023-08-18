@@ -1,20 +1,23 @@
-import { DefaultTheme, useTheme } from 'styled-components';
+import { type DefaultTheme, useTheme } from 'styled-components'
 
-import { CircleNotch } from 'phosphor-react';
+import { CircleNotch } from 'phosphor-react'
 
-import { Container } from './styles';
+import { Container } from './styles'
 
 interface LoadingSpinnerProps {
-  color: keyof DefaultTheme['colors'];
-  size: string | number;
+  color: keyof DefaultTheme['colors']
+  size: string | number
 }
 
-export function LoadingSpinner({ color, size }: LoadingSpinnerProps) {
-  const { colors } = useTheme();
+export function LoadingSpinner({
+  color,
+  size,
+}: LoadingSpinnerProps): JSX.Element {
+  const { colors } = useTheme()
 
   return (
     <Container>
       <CircleNotch size={size} color={colors[color]} />
     </Container>
-  );
+  )
 }

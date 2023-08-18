@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu';
+import { useState } from 'react'
+import { Root as DropdownMenuRoot } from '@radix-ui/react-dropdown-menu'
 
-import { Faders } from 'phosphor-react';
+import { Faders } from 'phosphor-react'
 
 import {
   DropdownMenuContent,
@@ -9,18 +9,18 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from './styles';
+} from './styles'
 
-type SelectableItemTypes = keyof typeof selectableItems;
+type SelectableItemTypes = keyof typeof selectableItems
 
 const selectableItems = {
   sku: 'SKU',
   name: 'Nome',
   none: 'Não refinar',
-};
+}
 
-export function RefineSearch() {
-  const [selectedItem, setSelectedItem] = useState<SelectableItemTypes>('none');
+export function RefineSearch(): JSX.Element {
+  const [selectedItem, setSelectedItem] = useState<SelectableItemTypes>('none')
 
   return (
     <DropdownMenuRoot>
@@ -47,5 +47,5 @@ export function RefineSearch() {
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenuRoot>
-  );
+  )
 }

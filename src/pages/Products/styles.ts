@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const Container = styled.div`
   display: flex;
-`;
+`
 
 export const Main = styled.main`
   display: flex;
@@ -15,4 +15,4 @@ export const Main = styled.main`
     font-weight: 500;
     color: ${({ theme }) => theme.colors.color_900};
   }
-`;
+`

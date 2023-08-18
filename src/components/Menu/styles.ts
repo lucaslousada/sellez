@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { Trigger, Root, List, Content } from '@radix-ui/react-tabs';
+import styled from 'styled-components'
+import { Trigger, Root, List, Content } from '@radix-ui/react-tabs'
 
 interface ContainerTabsContentProps {
-  isTheTabVisible: string;
+  isTheTabVisible: string
 }
 
 export const TabsRoot = styled(Root)`
@@ -10,13 +10,13 @@ export const TabsRoot = styled(Root)`
   top: 0;
   display: flex;
   height: 100vh;
-`;
+`
 
 export const TabsContent = styled(Content)`
   &:focus {
     outline: none;
   }
-`;
+`
 
 export const TabsList = styled(List)`
   z-index: 1;
@@ -24,7 +24,7 @@ export const TabsList = styled(List)`
   width: min-content;
   padding: 30px 15px 20px;
   background-color: ${({ theme }) => theme.colors.color_100};
-`;
+`
 
 export const Logo = styled.div`
   display: flex;
@@ -37,7 +37,7 @@ export const Logo = styled.div`
     width: 32px;
     height: 32px;
   }
-`;
+`
 
 export const TabsTrigger = styled(Trigger)`
   display: flex;
@@ -74,7 +74,7 @@ export const TabsTrigger = styled(Trigger)`
       color: ${({ theme }) => theme.colors.color_900};
     }
   }
-`;
+`
 
 export const ContainerTabsContent = styled.div<ContainerTabsContentProps>`
   display: ${({ isTheTabVisible }) =>
@@ -84,7 +84,7 @@ export const ContainerTabsContent = styled.div<ContainerTabsContentProps>`
   background-color: ${({ theme }) => theme.colors.color_200};
   overflow-y: auto;
   overflow-x: hidden;
-`;
+`
 
 export const Header = styled.header`
   display: flex;
@@ -96,7 +96,7 @@ export const Header = styled.header`
     font-size: 14px;
     color: ${({ theme }) => theme.colors.color_700};
   }
-`;
+`
 
 export const MinimizeMenuButton = styled.button`
   display: flex;
@@ -120,7 +120,7 @@ export const MinimizeMenuButton = styled.button`
       color: ${({ theme }) => theme.colors.color_900};
     }
   }
-`;
+`
 
 export const LinkList = styled.ul`
   font-size: 15px;
@@ -133,7 +133,8 @@ export const LinkList = styled.ul`
     padding: 8px 10px;
     border-radius: 5px;
     color: ${({ theme }) => theme.colors.color_700};
-    transition: color ${({ theme }) => theme.transitions.default},
+    transition:
+      color ${({ theme }) => theme.transitions.default},
       background-color ${({ theme }) => theme.transitions.default};
 
     &:hover {
@@ -152,10 +153,10 @@ export const LinkList = styled.ul`
       text-overflow: ellipsis;
     }
   }
-`;
+`
 
 export const ListItem = styled.li`
   & + li {
     margin-top: 5px;
   }
-`;
+`

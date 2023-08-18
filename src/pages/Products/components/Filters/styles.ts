@@ -1,12 +1,12 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 interface SearchBarProps {
-  inputFieldHasFocus: boolean;
+  inputFieldHasFocus: boolean
 }
 
 export const Container = styled.div`
   margin-top: 10px;
-`;
+`
 
 export const SearchBar = styled.div<SearchBarProps>`
   display: flex;
@@ -38,10 +38,10 @@ export const SearchBar = styled.div<SearchBarProps>`
     margin-right: 8px;
     color: ${({ theme }) => theme.colors.color_800};
   }
-`;
+`
 
 export const MultipleFilters = styled.ul`
   display: flex;
   gap: 0 10px;
   margin-top: 10px;
-`;
+`

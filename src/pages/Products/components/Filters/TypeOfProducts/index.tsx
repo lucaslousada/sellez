@@ -1,16 +1,16 @@
-import { ReactNode, useState } from 'react';
+import { type ReactNode, useState } from 'react'
 
-import { TabsRoot, TabsList, TabsTrigger, TabsContent } from './styles';
+import { TabsRoot, TabsList, TabsTrigger, TabsContent } from './styles'
 
 interface TypeOfProductsProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
-type TypesOfProducts = 'all' | 'simple';
+type TypesOfProducts = 'all' | 'simple'
 
-export function TypeOfProducts({ children }: TypeOfProductsProps) {
+export function TypeOfProducts({ children }: TypeOfProductsProps): JSX.Element {
   const [activeProductTypeFilter, setActiveProductTypeFilter] =
-    useState<TypesOfProducts>('all');
+    useState<TypesOfProducts>('all')
 
   return (
     <TabsRoot
@@ -28,5 +28,5 @@ export function TypeOfProducts({ children }: TypeOfProductsProps) {
       </TabsList>
       <TabsContent value={activeProductTypeFilter}>{children}</TabsContent>
     </TabsRoot>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { useTheme } from 'styled-components';
-import { NavLink } from 'react-router-dom';
-import { ReactComponent as LogoImg } from '../../assets/logo.svg';
+import { useState } from 'react'
+import { useTheme } from 'styled-components'
+import { NavLink } from 'react-router-dom'
+import { ReactComponent as LogoImg } from '../../assets/logo.svg'
 
 import {
   CaretDoubleLeft,
@@ -9,7 +9,7 @@ import {
   Database,
   File,
   Package,
-} from 'phosphor-react';
+} from 'phosphor-react'
 
 import {
   TabsTrigger,
@@ -22,35 +22,40 @@ import {
   LinkList,
   ListItem,
   Logo,
-} from './styles';
+} from './styles'
 
 interface linkIsActiveProps {
-  isActive: boolean;
+  isActive: boolean
 }
 
-type valuesTypesInMenuGroups = keyof typeof valuesInMenuGroups;
+type valuesTypesInMenuGroups = keyof typeof valuesInMenuGroups
+
+interface LinkIsActiveResult {
+  color: string
+  backgroundColor: string
+}
 
 const valuesInMenuGroups = {
   dashboard: 'Painel de Controle',
   records: 'Cadastros',
   none: 'Exibição desativada',
-};
+}
 
-export function Menu() {
+export function Menu(): JSX.Element {
   const [selectedMenuGroup, setSelectedMenuGroup] =
-    useState<valuesTypesInMenuGroups>('records');
+    useState<valuesTypesInMenuGroups>('records')
 
-  const { colors } = useTheme();
+  const { colors } = useTheme()
 
-  function linkIsActive({ isActive }: linkIsActiveProps) {
+  function linkIsActive({ isActive }: linkIsActiveProps): LinkIsActiveResult {
     return {
       color: isActive ? colors.color_900 : '',
       backgroundColor: isActive ? colors.transparent_color_200 : '',
-    };
+    }
   }
 
-  function closeTab() {
-    setSelectedMenuGroup('none');
+  function closeTab(): void {
+    setSelectedMenuGroup('none')
   }
 
   return (
@@ -118,5 +123,5 @@ export function Menu() {
         </TabsContent>
       </ContainerTabsContent>
     </TabsRoot>
-  );
+  )
 }

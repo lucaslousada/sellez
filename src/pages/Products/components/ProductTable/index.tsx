@@ -1,22 +1,22 @@
-import { useContext } from 'react';
-import { ProductsContext } from '../../../../contexts/ProcuctsContext';
-import { TypeOfProducts } from '../Filters/TypeOfProducts';
-import { LoadingSpinner } from '../../../../components/LoadingSpinner';
-import { NoRecordsFound } from '../../../../components/NoRecordsFound';
+import { useContext } from 'react'
+import { ProductsContext } from '../../../../contexts/ProcuctsContext'
+import { TypeOfProducts } from '../Filters/TypeOfProducts'
+import { LoadingSpinner } from '../../../../components/LoadingSpinner'
+import { NoRecordsFound } from '../../../../components/NoRecordsFound'
 
-import { Table } from './styles';
+import { Table } from './styles'
 
-export function ProductTable() {
-  const { products, isLoadingProducts } = useContext(ProductsContext);
+export function ProductTable(): JSX.Element | undefined {
+  const { products, isLoadingProducts } = useContext(ProductsContext)
 
   if (isLoadingProducts)
     return (
       <TypeOfProducts>
         <LoadingSpinner size="38px" color="color_700" />
       </TypeOfProducts>
-    );
+    )
 
-  if (!isLoadingProducts && !products.length)
+  if (!isLoadingProducts && products.length === 0)
     return (
       <TypeOfProducts>
         <NoRecordsFound
@@ -24,9 +24,9 @@ export function ProductTable() {
           description="Experimente utilizar outras opções de busca."
         />
       </TypeOfProducts>
-    );
+    )
 
-  if (!isLoadingProducts && products.length)
+  if (!isLoadingProducts && products.length > 0)
     return (
       <TypeOfProducts>
         <Table>
@@ -39,7 +39,7 @@ export function ProductTable() {
             </tr>
           </thead>
           <tbody>
-            {products.map(product => (
+            {products.map((product) => (
               <tr key={product.id}>
                 <td>{product.name}</td>
                 <td>{product.sku}</td>
@@ -50,5 +50,5 @@ export function ProductTable() {
           </tbody>
         </Table>
       </TypeOfProducts>
-    );
+    )
 }

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 import {
   Content,
@@ -6,7 +6,7 @@ import {
   RadioItem,
   Label,
   Trigger,
-} from '@radix-ui/react-dropdown-menu';
+} from '@radix-ui/react-dropdown-menu'
 
 export const DropdownMenuTrigger = styled(Trigger)`
   display: flex;
@@ -34,7 +34,7 @@ export const DropdownMenuTrigger = styled(Trigger)`
   &[data-state='open'] {
     box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.main};
   }
-`;
+`
 
 export const DropdownMenuContent = styled(Content)`
   z-index: 1;
@@ -43,19 +43,19 @@ export const DropdownMenuContent = styled(Content)`
   background-color: ${({ theme }) => theme.colors.color_300};
   border: 1px solid ${({ theme }) => theme.colors.transparent_color_100};
   border-radius: 5px;
-`;
+`
 
 export const DropdownMenuLabel = styled(Label)`
   padding: 6px 8px;
   font-size: 14px;
   color: ${({ theme }) => theme.colors.color_700};
-`;
+`
 
 export const DropdownMenuRadioGroup = styled(RadioGroup)`
   display: flex;
   flex-direction: column;
   gap: 2px 0;
-`;
+`
 
 export const DropdownMenuRadioItem = styled(RadioItem)`
   padding: 6px 8px;
@@ -74,4 +74,4 @@ export const DropdownMenuRadioItem = styled(RadioItem)`
   &:focus {
     background-color: ${({ theme }) => theme.colors.color_400};
   }
-`;
+`

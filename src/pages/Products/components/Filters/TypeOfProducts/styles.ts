@@ -1,18 +1,18 @@
-import styled from 'styled-components';
-import { Root, Content, List, Trigger } from '@radix-ui/react-tabs';
+import styled from 'styled-components'
+import { Root, Content, List, Trigger } from '@radix-ui/react-tabs'
 
 export const TabsRoot = styled(Root)`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-`;
+`
 
 export const TabsList = styled(List)`
   display: flex;
   gap: 0 16px;
   margin-top: 40px;
   border-bottom: 1px solid ${({ theme }) => theme.colors.transparent_color_100};
-`;
+`
 
 export const TabsTrigger = styled(Trigger)`
   position: relative;
@@ -41,7 +41,7 @@ export const TabsTrigger = styled(Trigger)`
       background-color: ${({ theme }) => theme.colors.color_900};
     }
   }
-`;
+`
 
 export const TabsContent = styled(Content)`
   padding-top: 20px;
@@ -50,4 +50,4 @@ export const TabsContent = styled(Content)`
   &:focus {
     outline: none;
   }
-`;
+`

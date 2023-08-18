@@ -1,28 +1,28 @@
-import { ReactNode } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { type ReactNode } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
-import { CaretLeft, CaretRight, House } from 'phosphor-react';
+import { CaretLeft, CaretRight, House } from 'phosphor-react'
 
-import { BackToPreviousPage, LinkHomePage, List } from './styles';
+import { BackToPreviousPage, LinkHomePage, List } from './styles'
 
 interface BreadcrumbsProps {
-  children: ReactNode;
-  BtnBackToPreviousPage?: boolean;
+  children: ReactNode
+  BtnBackToPreviousPage?: boolean
 }
 
 export function Breadcrumbs({
   children,
   BtnBackToPreviousPage,
-}: BreadcrumbsProps) {
-  const navigate = useNavigate();
+}: BreadcrumbsProps): JSX.Element {
+  const navigate = useNavigate()
 
-  function backToPreviousPage() {
-    navigate('..');
+  function backToPreviousPage(): void {
+    navigate('..')
   }
 
   return (
     <List>
-      {BtnBackToPreviousPage && (
+      {BtnBackToPreviousPage !== undefined && (
         <li>
           <BackToPreviousPage type="button" onClick={backToPreviousPage}>
             <CaretLeft />
@@ -38,5 +38,5 @@ export function Breadcrumbs({
       </LinkHomePage>
       {children}
     </List>
-  );
+  )
 }

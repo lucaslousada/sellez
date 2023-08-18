@@ -1,12 +1,12 @@
-import { ThemeProvider } from 'styled-components';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components'
+import { Navigate, Route, Routes } from 'react-router-dom'
 
-import { Products } from './pages/Products';
+import { Products } from './pages/Products'
 
-import { GlobalStyle } from './styles/global';
-import { dark } from './styles/themes/dark';
+import { GlobalStyle } from './styles/global'
+import { dark } from './styles/themes/dark'
 
-export function App() {
+export function App(): JSX.Element {
   return (
     <ThemeProvider theme={dark}>
       <Routes>
@@ -17,5 +17,5 @@ export function App() {
 
       <GlobalStyle />
     </ThemeProvider>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import { DefaultTheme } from 'styled-components';
+import { type DefaultTheme } from 'styled-components'
 
 export const dark: DefaultTheme = {
   title: 'dark',
@@ -25,4 +25,4 @@ export const dark: DefaultTheme = {
   transitions: {
     default: '0.2s ease',
   },
-};
+}

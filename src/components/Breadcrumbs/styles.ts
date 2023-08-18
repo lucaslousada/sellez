@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 export const List = styled.ol`
   display: flex;
@@ -22,7 +22,7 @@ export const List = styled.ol`
     height: 14px;
     color: ${({ theme }) => theme.colors.color_800};
   }
-`;
+`
 
 export const BackToPreviousPage = styled.button`
   display: flex;
@@ -44,7 +44,7 @@ export const BackToPreviousPage = styled.button`
   &:hover {
     background-color: ${({ theme }) => theme.colors.transparent_color_100};
   }
-`;
+`
 
 export const LinkHomePage = styled.li`
   a {
@@ -62,4 +62,4 @@ export const LinkHomePage = styled.li`
   a:focus svg {
     color: ${({ theme }) => theme.colors.main};
   }
-`;
+`
