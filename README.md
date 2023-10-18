@@ -8,7 +8,7 @@ Um app ERP para gestão empresarial com foco em e-commerce e marketplaces.
 [![Repo Size](https://img.shields.io/github/repo-size/lucaslousada/sellez?color=202225&style=flat-square)](#)
 [![License](https://img.shields.io/github/license/lucaslousada/sellez?color=202225&style=flat-square)](LICENSE.md)
 
-🚧 Em construção... 🚧
+🚧 App em desenvolvimento... 🚧
 
 <div style="display: flex; flex-wrap: wrap; gap: 1%;">
   <img alt="Tabela de clientes" src="./.github/app-preview-1.png" width="49.5%">
